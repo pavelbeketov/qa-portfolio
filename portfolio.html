@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QA Portfolio</title>
+  <!-- <link rel="stylesheet" href="stylep.css" /> -->
+  <link rel="icon" type="image/jpeg" href="img/logopb.jpg">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="stylep.css">
+</head>
+
+
+<body>
+  <header class="header">
+    <a href="index.html" class="logo">Paul<span>.</span></a>
+    <nav class="nav">
+      <a href="index.html#about">About</a>
+      <a href="index.html#skills">Skills</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="page">
+
+    <section class="portfolio-hero">
+      <div class="label">QA PORTFOLIO</div>
+      <h1>Bug Tracking Examples</h1>
+      <p>Examples of how I find, document and verify defects.</p>
+    </section>
+
+    <section class="cards">
+
+
+
+      <article class="card">
+        <div class="card-top">
+          <span class="badge high">High Severity</span>
+          <span class="case-id">CASE 01</span>
+        </div>
+
+        <h2>Login Bug: HTML Injection In Email Field</h2>
+
+        <p class="desc">
+          During negative testing of the login page, I found that the email field accepted HTML input and the application did not handle it safely.
+        </p>
+
+        <h3>Steps to reproduce</h3>
+        <ol>
+          <li>Open the login page.</li>
+          <li>Enter <code>&lt;h1&gt;test&lt;/h1&gt;</code> into Email field.</li>
+          <li>Enter any password.</li>
+          <li>Click Login.</li>
+          <li>Check UI response, Network tab and API response.</li>
+        </ol>
+
+        <div class="result">
+          <p><b>Expected:</b> Input is sanitized and validation error is displayed.</p>
+          <p><b>Actual:</b> HTML is rendered in UI or payload reaches backend without filtering.</p>
+          <p><b>Impact:</b> Weak validation / possible security issue.</p>
+        </div>
+
+        <div class="jira">Jira Summary:
+Login form renders HTML input from Email field.
+
+Type: Bug
+Area: Security / Validation
+Priority: High
+Environment: Chrome, Windows 11
+Attachments: Screenshot, DevTools Network, API response</div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="badge medium">Medium Severity</span>
+          <span class="case-id">CASE 02</span>
+        </div>
+
+        <h2>API Bug: Incorrect Status Code For Invalid Login</h2>
+
+        <p class="desc">
+          During REST API testing, I checked how the authentication endpoint handles invalid credentials.
+        </p>
+
+        <h3>Steps to reproduce</h3>
+        <ol>
+          <li>Open Postman.</li>
+          <li>Send POST request to <code>/api/login</code>.</li>
+          <li>Use invalid email and password.</li>
+          <li>Check status code and response body.</li>
+        </ol>
+
+        <div class="result">
+          <p><b>Expected:</b> API returns 401 Unauthorized with clear error message.</p>
+          <p><b>Actual:</b> API returns 200 OK with success:false or 500 Internal Server Error.</p>
+          <p><b>Impact:</b> Incorrect API response handling.</p>
+        </div>
+
+        <div class="jira">Jira Summary:
+Invalid login returns incorrect API status code.
+
+Type: Bug
+Area: REST API / Authentication
+Priority: Medium
+Environment: Postman
+Attachments: Request body, response screenshot</div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="badge high">High Severity</span>
+          <span class="case-id">CASE 03</span>
+        </div>
+
+        <h2>Database Bug: Incomplete User Record</h2>
+
+        <p class="desc">
+          During registration testing, I validated that user data is saved correctly in the database after successful registration.
+        </p>
+
+        <h3>Steps to reproduce</h3>
+        <ol>
+          <li>Register a new user through UI.</li>
+          <li>Check API response.</li>
+          <li>Run SQL query for the created email.</li>
+          <li>Verify required fields: status and created_at.</li>
+        </ol>
+
+        <div class="result">
+          <p><b>Expected:</b> User exists with valid status and created_at value.</p>
+          <p><b>Actual:</b> User is created, but status or created_at is NULL.</p>
+          <p><b>Impact:</b> Data integrity issue.</p>
+        </div>
+
+        <div class="jira">Jira Summary:
+Registration creates user with incomplete database fields.
+
+Type: Bug
+Area: Database / Registration
+Priority: High
+Environment: Web app, SQL client
+Attachments: SQL query result, API response</div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="badge high">High Severity</span>
+          <span class="case-id">CASE 04</span>
+        </div>
+
+        <h2>Client-Server Bug: UI Shows Success After Backend Error</h2>
+
+        <p class="desc">
+          During profile update testing, I found that the frontend showed a successful save message even when the backend request failed.
+        </p>
+
+        <h3>Steps to reproduce</h3>
+        <ol>
+          <li>Open Profile Settings.</li>
+          <li>Change user name.</li>
+          <li>Click Save.</li>
+          <li>Check request in DevTools Network tab.</li>
+        </ol>
+
+        <div class="result">
+          <p><b>Expected:</b> User sees error message if backend returns failure.</p>
+          <p><b>Actual:</b> Backend returns 500, but UI shows “Saved successfully”.</p>
+          <p><b>Impact:</b> Frontend/backend state mismatch.</p>
+        </div>
+
+        <div class="jira">Jira Summary:
+Profile page shows success despite backend failure.
+
+Type: Bug
+Area: Frontend / Backend Sync
+Priority: High
+Environment: Chrome, Windows 11
+Attachments: UI screenshot, Network response</div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="badge medium">Medium Severity</span>
+          <span class="case-id">CASE 05</span>
+        </div>
+
+        <h2>SQL Bug: UI Filter Shows Incorrect Records</h2>
+
+        <p class="desc">
+          During search/filter testing, I compared UI results with database data to verify that filtering works correctly.
+        </p>
+
+        <h3>Steps to reproduce</h3>
+        <ol>
+          <li>Open Users page.</li>
+          <li>Select filter: Active.</li>
+          <li>Compare UI count with SQL query.</li>
+          <li>Check whether inactive records are displayed.</li>
+        </ol>
+
+        <div class="result">
+          <p><b>Expected:</b> UI displays only active records.</p>
+          <p><b>Actual:</b> UI also displays archived or inactive records.</p>
+          <p><b>Impact:</b> Incorrect filtering logic.</p>
+        </div>
+
+        <div class="jira">Jira Summary:
+Status filter displays records with incorrect status.
+
+Type: Bug
+Area: Search / Filtering
+Priority: Medium
+Environment: Web app, SQL client
+Attachments: Screenshot, SQL query result</div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="badge medium">Medium Severity</span>
+          <span class="case-id">CASE 06</span>
+        </div>
+
+        <h2>Upload Bug: Error Visible Only In Server Logs</h2>
+
+        <p class="desc">
+          During file upload testing, I checked how the application handles invalid file type and oversized files.
+        </p>
+
+        <h3>Steps to reproduce</h3>
+        <ol>
+          <li>Upload invalid file type or oversized file.</li>
+          <li>Observe generic UI error or freeze.</li>
+          <li>Check backend logs.</li>
+          <li>Find exception or validation error in logs.</li>
+        </ol>
+
+        <div class="result">
+          <p><b>Expected:</b> User-friendly validation message is displayed.</p>
+          <p><b>Actual:</b> UI shows generic error and backend logs contain exception.</p>
+          <p><b>Impact:</b> Missing file validation / poor error handling.</p>
+        </div>
+
+        <div class="jira">Jira Summary:
+Invalid upload causes backend exception and poor UI error.
+
+Type: Bug
+Area: File Upload / Logs
+Priority: Medium
+Environment: Web app, Linux logs
+Attachments: Screenshot, server log excerpt</div>
+      </article>
+
+      <article class="card">
+        <div class="card-top">
+          <span class="badge high">High Severity</span>
+          <span class="case-id">CASE 07</span>
+        </div>
+
+        <h2>Regression Bug: Password Reset Link Can Be Reused</h2>
+
+        <p class="desc">
+          During regression testing after release, I verified that password reset links expire after successful use.
+        </p>
+
+        <h3>Steps to reproduce</h3>
+        <ol>
+          <li>Request password reset.</li>
+          <li>Use reset link once.</li>
+          <li>Try to use the same link again.</li>
+          <li>Check API response.</li>
+        </ol>
+
+        <div class="result">
+          <p><b>Expected:</b> Second attempt returns 400/410 link expired.</p>
+          <p><b>Actual:</b> Same reset link can be used repeatedly.</p>
+          <p><b>Impact:</b> Regression / security issue.</p>
+        </div>
+
+        <div class="jira">Jira Summary:
+Password reset link remains valid after first use.
+
+Type: Bug
+Area: Regression / Security
+Priority: High
+Environment: Web app, API
+Attachments: Steps, API response, retest notes</div>
+      </article>
+
+    </section>
+  </main>
+</body>
+</html>
